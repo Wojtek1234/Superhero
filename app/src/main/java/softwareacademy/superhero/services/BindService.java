@@ -6,16 +6,18 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 
+import softwareacademy.superhero.BindedServiceView;
 import softwareacademy.superhero.utils.Constans;
 import softwareacademy.superhero.utils.SuperheroLog;
 
 public class BindService extends Service {
 
     public static final String BIND_SERVICE = "BindService";
-    private SuperheroBinder binder;
+    private SuperheroBinder binder = new SuperheroBinder();
     private Handler handler;
     private int counter = 0;
     private Runnable runnable;
+    private BindedServiceView bindedServiceView;
 
     public BindService() {
     }
@@ -41,6 +43,9 @@ public class BindService extends Service {
             if (counter < Constans.TIMES) {
                 SuperheroLog.log(BIND_SERVICE, Thread.currentThread().getName() + " " + counter);
                 handler.postDelayed(runnable, Constans.MILIS);
+                if(bindedServiceView != null){
+                    bindedServiceView.onChange(counter);
+                }
             }else {
                 handler.removeCallbacks(runnable);
             }
@@ -48,6 +53,9 @@ public class BindService extends Service {
         handler.postDelayed(runnable, 100);
     }
 
+    public void setBindedServiceView(BindedServiceView bindedServiceView) {
+        this.bindedServiceView = bindedServiceView;
+    }
 
     public class SuperheroBinder extends Binder {
         public BindService getService() {
