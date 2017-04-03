@@ -8,17 +8,18 @@ import softwareacademy.superhero.utils.SuperheroLog;
 public class SuperheroIntentService extends IntentService {
 
 
-    public static final String TAG = "intentService";
+    public static final String TAG = "INTENT SERVICE";
 
-    public SuperheroIntentService(String name) {
-        super(name);
+    public SuperheroIntentService() {
+        super(TAG + "thread");
     }
+
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        for(int i=0;i<100;i++){
+        for (int i = 0; i < 100; i++) {
             sleep();
-            SuperheroLog.log(TAG,Thread.currentThread().getName() + i);
+            SuperheroLog.log(TAG, Thread.currentThread().getName() + " " + i);
         }
     }
 

@@ -1,7 +1,9 @@
 package softwareacademy.superhero.utils;
 
-import android.support.compat.BuildConfig;
+
 import android.util.Log;
+
+import softwareacademy.superhero.BuildConfig;
 
 /**
  *
