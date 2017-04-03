@@ -3,6 +3,7 @@ package softwareacademy.superhero.services;
 import android.app.IntentService;
 import android.content.Intent;
 
+import softwareacademy.superhero.utils.Constans;
 import softwareacademy.superhero.utils.SuperheroLog;
 
 public class SuperheroIntentService extends IntentService {
@@ -17,7 +18,7 @@ public class SuperheroIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < Constans.TIMES; i++) {
             sleep();
             SuperheroLog.log(TAG, Thread.currentThread().getName() + " " + i);
         }
@@ -25,7 +26,7 @@ public class SuperheroIntentService extends IntentService {
 
     private void sleep() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(Constans.MILIS);
         } catch (InterruptedException e) {
             // Restore interrupt status.
             Thread.currentThread().interrupt();
