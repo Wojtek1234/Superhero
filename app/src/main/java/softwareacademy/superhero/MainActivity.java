@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements BindedServiceView
     @Override
     protected void onPause() {
         super.onPause();
+
         unbindService(mConnection);
         unregisterReceiver(receiver);
     }
