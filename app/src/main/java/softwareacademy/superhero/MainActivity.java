@@ -30,12 +30,32 @@ public class MainActivity extends AppCompatActivity implements BindedServiceView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         startService(new Intent(this, SuperheroIntentService.class));
         bindService(new Intent(this, BindService.class), mConnection, Context.BIND_AUTO_CREATE);
         intentServiceView = ViewsUtils.findView(this, R.id.intent_value);
         bindServiceView = ViewsUtils.findView(this, R.id.bind_value);
+        receiver = new SimpleBroadcastReceiver();
+        this.registerReceiver(receiver, new IntentFilter(SEND_BROADCAST));
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unbindService(mConnection);
+        unregisterReceiver(receiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     private BindService bindService;
     private boolean mBound;
@@ -57,18 +77,7 @@ public class MainActivity extends AppCompatActivity implements BindedServiceView
     };
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        receiver = new SimpleBroadcastReceiver();
-        this.registerReceiver(receiver, new IntentFilter(SEND_BROADCAST));
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(receiver);
-    }
 
     public static void pushMessageToActivity(Service service, int value) {
         Intent intent = new Intent();
