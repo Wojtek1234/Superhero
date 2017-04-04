@@ -18,10 +18,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         startService(new Intent(this, SuperheroIntentService.class));
         bindService(new Intent(this, BindService.class),mConnection, Context.BIND_AUTO_CREATE);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unbindService(mConnection);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     private BindService bindService;
     private boolean mBound;
