@@ -25,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startService(new Intent(this, SuperheroIntentService.class));
-        bindService(new Intent(this, BindService.class),mConnection, Context.BIND_AUTO_CREATE);
+        bindService(new Intent(this, BindService.class), mConnection, Context.BIND_AUTO_CREATE);
+//        BIND_AUTO_CREATE – binds to an existing Service, creating the Service if it does not exist. onStartCommand() is not called
+//        BIND_DEBUG_UNBIND – should only be used for debugging
+//        BIND_NOT_FOREGROUND – won’t allow the Service’s priority to be raised to that of foreground priority. Its priority will only be raised to that of the client’s priority. This is only important if the client’s process is in the foreground and the Service’s process is in the background
+//        BIND_IMPORTANT  - this service is very important to the client, so should be brought to the foreground process level when the client i
+//        BIND_WAIVE_PRIORITY -  don't impact the scheduling or memory management priority of the target service's
     }
 
     @Override
