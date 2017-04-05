@@ -23,7 +23,20 @@
             android:exported="true" />
         <service
             android:name=".services.SuperheroIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <receiver android:name=".receivers.ACPlugInReveiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.AIRPLANE_MODE" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".services.PowerChangeService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

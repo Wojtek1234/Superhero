@@ -25,6 +25,21 @@ public class MainActivity extends AppCompatActivity implements BindedServiceView
 
     private AppCompatTextView intentServiceView, bindServiceView;
 
+
+
+    public static Intent createIntent(Context context) {
+        Intent intent = new Intent(context,MainActivity.class);
+        return intent;
+    }
+
+    public static void pushMessageToActivity(Service service, int value) {
+        Intent intent = new Intent();
+        intent.setAction(SEND_BROADCAST);
+        intent.putExtra(INT_VALUE, value);
+        service.sendBroadcast(intent);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,17 +95,11 @@ public class MainActivity extends AppCompatActivity implements BindedServiceView
 
 
 
-    public static void pushMessageToActivity(Service service, int value) {
-        Intent intent = new Intent();
-        intent.setAction(SEND_BROADCAST);
-        intent.putExtra(INT_VALUE, value);
-        service.sendBroadcast(intent);
-    }
-
     @Override
     public void onChange(int value) {
         setValueOnTextView(bindServiceView, value,"bind ");
     }
+
 
 
     public class SimpleBroadcastReceiver extends BroadcastReceiver {

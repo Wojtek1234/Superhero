@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Superhero</string>
+    <string name="powerChange">AC Change !</string>
+    <string name="battery_change">Baterry Status change</string>
 </resources>
