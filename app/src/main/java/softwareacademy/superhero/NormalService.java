@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 
 public class NormalService extends Service {
     private BinderImplementer binderImplementer;
+    private ShowCounter counterShower;
+
     public NormalService() {
     }
 
@@ -21,6 +23,11 @@ public class NormalService extends Service {
     public int getMe(){
         return 12345;
     }
+
+    public void setCounter(ShowCounter counterShower) {
+        this.counterShower = counterShower;
+    }
+
 
     public class BinderImplementer extends Binder {
         public NormalService getService() {
@@ -50,6 +57,9 @@ public class NormalService extends Service {
             @Override
             public void run() {
                 counter++;
+                if(counterShower !=null){
+                    counterShower.showBind(counter);
+                }
                 if (counter < 100) {
                     LoggerHelper.log(BIND_SERVICE, Thread.currentThread().getName() + " " + counter);
                     handler.postDelayed(runnable, 100);
