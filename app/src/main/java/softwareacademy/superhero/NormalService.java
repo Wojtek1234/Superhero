@@ -15,7 +15,13 @@ public class NormalService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public class BinderImplemter extends Binder{
+    public int getMe(){
+        return 12345;
+    }
 
+    public class BinderImplementer extends Binder {
+        public NormalService getService() {
+            return NormalService.this;
+        }
     }
 }
