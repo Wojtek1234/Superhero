@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements ShowCounter{
 
 
     private TextView bindTextView, intentTextView;
+    private NormalService normalService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,26 +25,39 @@ public class MainActivity extends AppCompatActivity implements ShowCounter{
         bindService(bindServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
         Intent intentServiceIntent = new Intent(this, UnnormalIntentService.class);
         startService(intentServiceIntent);
+
+        findViewById(R.id.unbind_button).setOnClickListener(v -> unbindMainActivity());
     }
 
+    private void unbindMainActivity() {
+        if(bindToService){
+            bindToService = false;
+            normalService.removeCounter();
+            unbindService(mConnection);
+        }
+    }
+
+
+    private boolean bindToService =false;
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(mConnection);
+        unbindMainActivity();
     }
 
     ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            NormalService normalService = ((NormalService.BinderImplementer) service).getService();
+            normalService = ((NormalService.BinderImplementer) service).getService();
             normalService.setCounter(MainActivity.this);
+            bindToService = true;
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+            bindToService = false;
         }
     };
 

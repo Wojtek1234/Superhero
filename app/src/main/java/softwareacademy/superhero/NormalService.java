@@ -8,7 +8,7 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 
 public class NormalService extends Service {
-    private BinderImplementer binderImplementer;
+    private BinderImplementer binderImplementer  = new BinderImplementer();
     private ShowCounter counterShower;
 
     public NormalService() {
@@ -26,6 +26,10 @@ public class NormalService extends Service {
 
     public void setCounter(ShowCounter counterShower) {
         this.counterShower = counterShower;
+    }
+
+    public void removeCounter(){
+        this.counterShower = null;
     }
 
 
