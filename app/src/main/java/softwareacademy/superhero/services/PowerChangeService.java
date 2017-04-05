@@ -50,7 +50,7 @@ public class PowerChangeService extends Service {
     }
 
     private void showNotification(Intent intent) {
-        if(intent !=null){
+        if (intent != null) {
             boolean isCharging = intent.getBooleanExtra(IS_CHARGING, false);
             boolean isUSB = intent.getBooleanExtra(IS_USB, false);
             boolean isAC = intent.getBooleanExtra(IS_AC, false);
@@ -63,6 +63,7 @@ public class PowerChangeService extends Service {
                 .setContentText(getString(R.string.battery_change))
                 .setColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                 .setAutoCancel(true)
+                .addAction(R.drawable.ic_usb_black_24dp, getString(R.string.usb), getPendingIntent())
                 .setContentIntent(getPendingIntent());
 
         NotificationManager notificationManager =
