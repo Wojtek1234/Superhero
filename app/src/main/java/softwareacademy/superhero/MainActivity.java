@@ -1,11 +1,12 @@
 package softwareacademy.superhero;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent bindServiceIntent = new Intent(this,NormalService.class);
-        bindService(bindServiceIntent,mConnection,Intent.AUTO)
+        bindService(bindServiceIntent,mConnection, Context.BIND_AUTO_CREATE);
+        Intent intentServiceIntent = new Intent(this,UnnormalIntentService.class);
+        startService(intentServiceIntent);
     }
 
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             NormalService normalService=((NormalService.BinderImplementer)service).getService();
+            LoggerHelper.log("ACTIVITY",String.valueOf(normalService.getMe()));
         }
 
         @Override

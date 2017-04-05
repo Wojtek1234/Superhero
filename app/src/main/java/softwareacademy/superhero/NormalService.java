@@ -6,13 +6,14 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class NormalService extends Service {
+    private BinderImplementer binderImplementer;
     public NormalService() {
     }
 
     @Override
     public IBinder onBind(Intent intent) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        return binderImplementer;
     }
 
     public int getMe(){
