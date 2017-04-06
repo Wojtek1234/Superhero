@@ -20,8 +20,9 @@ public class UnnormalIntentService extends IntentService {
         for(int i=0;i<100;i++){
             LoggerHelper.log("INTENT_SERVICE",
                     Thread.currentThread().getName() + " " + String.valueOf(i));
+            MainActivity.sendBroadcast(this,i);
             try {
-                Thread.sleep(100);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

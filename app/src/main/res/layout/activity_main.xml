@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="softwareacademy.superhero.MainActivity" >
+    tools:context="softwareacademy.superhero.MainActivity"
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,4 +20,11 @@
         android:layout_height="wrap_content"
         android:text="@string/unbind"
         android:id="@+id/unbind_button"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:id="@+id/register_button"/>
 </LinearLayout>

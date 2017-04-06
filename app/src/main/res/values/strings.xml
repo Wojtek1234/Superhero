@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Superhero</string>
     <string name="unbind">UNBIND</string>
+    <string name="register">Register receiver</string>
 </resources>
