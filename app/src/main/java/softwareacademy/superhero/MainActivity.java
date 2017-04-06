@@ -1,5 +1,6 @@
 package softwareacademy.superhero;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +22,11 @@ public class MainActivity extends AppCompatActivity implements ShowCounter{
         setContentView(R.layout.activity_main);
         bindTextView = (TextView) findViewById(R.id.bind_service_text_view);
         intentTextView = (TextView) findViewById(R.id.intent_service_text_view);
-        Intent bindServiceIntent = new Intent(this, NormalService.class);
-        bindService(bindServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
+//        Intent bindServiceIntent = new Intent(this, NormalService.class);
+//        bindService(bindServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
+
+
+
         Intent intentServiceIntent = new Intent(this, UnnormalIntentService.class);
         startService(intentServiceIntent);
 
@@ -71,5 +75,15 @@ public class MainActivity extends AppCompatActivity implements ShowCounter{
     public void showBind(int counter) {
         bindTextView.setText(new StringBuilder().append("bind service ")
                 .append(counter).toString());
+    }
+
+    public static String COUNTER_KEY = "counter_key";
+    public class CounterBroadcastReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int counter = intent.getIntExtra(COUNTER_KEY,-100);
+            MainActivity.this.showIntent(counter);
+        }
     }
 }
